@@ -1,0 +1,7 @@
+{
+  "name": "cellular-automata",
+  "version": "0.0.1",
+  "description": "Cellular automata based on Atlas Wolfram",
+  "author": "Mathías Donoso <mathiasd88@gmail.com>",
+  "license": "MIT"
+}
