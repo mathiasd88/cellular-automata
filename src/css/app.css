@@ -1,0 +1,14 @@
+.dead {
+    background-color: #B22617;
+}
+
+.live {
+    background-color: #00B253;
+}
+
+.cell {
+    height: 8px;
+    width: 8px;
+    margin: 2px;
+    display: inline-block;
+}
