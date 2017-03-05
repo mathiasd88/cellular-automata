@@ -54,3 +54,7 @@ let automata = new CellularAutomata('app', rules)
 // and draw it in the screen
 automata.draw()
 ```
+
+## The result
+
+![](https://cloud.githubusercontent.com/assets/2658267/23589467/70150b9c-01ac-11e7-89d1-9b06751ae864.png)
