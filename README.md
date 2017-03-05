@@ -20,7 +20,7 @@ The **draw()** method will show tha automata inside the element with the **paren
 
 ####Example:
 For the first rule in:
-(http://atlas.wolfram.com/01/01/126/01_01_4_126.gif)
+![](http://atlas.wolfram.com/01/01/126/01_01_4_126.gif)
 
 The first array of rules will be:
 [1, 1, 1, 0]
