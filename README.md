@@ -6,8 +6,8 @@
 
 let automata = new CellularAutomata(parentId, rules)
 ```
-**parentId** is the id of the element where the automata will be contained
-**rules** is an array which represents the rules of the automata based
++ **parentId** is the id of the element where the automata will be contained
++ **rules** is an array which represents the rules of the automata based
 
 ```javascript
 
