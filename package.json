@@ -3,5 +3,13 @@
   "version": "0.0.1",
   "description": "Cellular automata based on Atlas Wolfram",
   "author": "Mathías Donoso <mathiasd88@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-env": "^1.2.0",
+    "webpack": "^2.2.1"
+  }
 }
