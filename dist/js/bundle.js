@@ -116,11 +116,12 @@ function createUniqueId() {
 
 
 class CellularAutomata {
-    constructor(appId, rules, size = 100) {
+    constructor(appId, rules, height = 100, width = 100) {
         this.app = document.getElementById(appId)
         this.appId = appId
         this.rules = rules
-        this.size = size
+        this.height = height
+        this.width = width
     }
 
     process() {
@@ -128,7 +129,7 @@ class CellularAutomata {
         let generation = this.createFirstGeneration()
 
         // Creates next generations (rule based life status)
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.height; i++) {
             generation = this.createNextGeneration(generation)
         }
     }
@@ -137,7 +138,7 @@ class CellularAutomata {
         let generation = new __WEBPACK_IMPORTED_MODULE_2__generation__["a" /* default */](this.app)
         generation.create()
 
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.width; i++) {
             let cell = new __WEBPACK_IMPORTED_MODULE_0__cell__["a" /* default */](generation, randomizeLife())
             cell.create()
         }
@@ -149,10 +150,9 @@ class CellularAutomata {
         let newGeneration = new __WEBPACK_IMPORTED_MODULE_2__generation__["a" /* default */](this.app)
         newGeneration.create()
 
-        for (let i = 0; i < this.size; i++) {
-            let cell = new __WEBPACK_IMPORTED_MODULE_0__cell__["a" /* default */](newGeneration)
-            let newStatus = __WEBPACK_IMPORTED_MODULE_1__rules__["a" /* default */].calculateStatus(this.rules, i, cell, previousGeneration)
-            cell.setStatus(newStatus)
+        for (let i = 0; i < this.width; i++) {
+            let newStatus = __WEBPACK_IMPORTED_MODULE_1__rules__["a" /* default */].calculateStatus(this.rules, i, previousGeneration)            
+            let cell = new __WEBPACK_IMPORTED_MODULE_0__cell__["a" /* default */](newGeneration, newStatus)
             cell.create()
         }
 
@@ -249,7 +249,7 @@ class Generation extends __WEBPACK_IMPORTED_MODULE_0__domelement__["a" /* defaul
 
 "use strict";
 class Rules {
-    static calculateStatus(rules, index, cell, previousGeneration) {
+    static calculateStatus(rules, index, previousGeneration) {
         previousGeneration = previousGeneration.getDomRepresentation().childNodes
 
         let prevSelf = previousGeneration[index]
@@ -272,6 +272,13 @@ function stateBasedOnRule(response) {
     }
 
     return 'dead'
+}
+
+function state(cell) {
+
+    let cellDiv = document.getElementById(cell.id)
+
+    return cellDiv.classList.contains('live') ? 1 : 0
 }
 
 /***/ }),

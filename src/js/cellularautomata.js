@@ -3,11 +3,12 @@ import Rules from './rules'
 import Generation from './generation'
 
 export default class CellularAutomata {
-    constructor(appId, rules, size = 100) {
+    constructor(appId, rules, height = 100, width = 100) {
         this.app = document.getElementById(appId)
         this.appId = appId
         this.rules = rules
-        this.size = size
+        this.height = height
+        this.width = width
     }
 
     process() {
@@ -15,7 +16,7 @@ export default class CellularAutomata {
         let generation = this.createFirstGeneration()
 
         // Creates next generations (rule based life status)
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.height; i++) {
             generation = this.createNextGeneration(generation)
         }
     }
@@ -24,7 +25,7 @@ export default class CellularAutomata {
         let generation = new Generation(this.app)
         generation.create()
 
-        for (let i = 0; i < this.size; i++) {
+        for (let i = 0; i < this.width; i++) {
             let cell = new Cell(generation, randomizeLife())
             cell.create()
         }
@@ -36,10 +37,9 @@ export default class CellularAutomata {
         let newGeneration = new Generation(this.app)
         newGeneration.create()
 
-        for (let i = 0; i < this.size; i++) {
-            let cell = new Cell(newGeneration)
-            let newStatus = Rules.calculateStatus(this.rules, i, cell, previousGeneration)
-            cell.setStatus(newStatus)
+        for (let i = 0; i < this.width; i++) {
+            let newStatus = Rules.calculateStatus(this.rules, i, previousGeneration)            
+            let cell = new Cell(newGeneration, newStatus)
             cell.create()
         }
 

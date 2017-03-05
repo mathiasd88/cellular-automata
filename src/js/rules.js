@@ -1,5 +1,5 @@
 export default class Rules {
-    static calculateStatus(rules, index, cell, previousGeneration) {
+    static calculateStatus(rules, index, previousGeneration) {
         previousGeneration = previousGeneration.getDomRepresentation().childNodes
 
         let prevSelf = previousGeneration[index]
