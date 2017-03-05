@@ -21,3 +21,10 @@ function stateBasedOnRule(response) {
 
     return 'dead'
 }
+
+function state(cell) {
+
+    let cellDiv = document.getElementById(cell.id)
+
+    return cellDiv.classList.contains('live') ? 1 : 0
+}
