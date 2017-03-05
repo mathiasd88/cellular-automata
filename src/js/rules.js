@@ -6,76 +6,18 @@ export default class Rules {
         let leftSibling = prevSelf.previousElementSibling || previousGeneration[previousGeneration.length - 1]
         let rightSibling = prevSelf.nextElementSibling || previousGeneration[0]
 
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 0
-        ) {
-            return 'dead'
+        for (let i = 0; i < rules.length; i++) {
+            if (state(leftSibling) == rules[i][0] && state(prevSelf) == rules[i][1] && state(rightSibling) == rules[i][2]) {
+                return stateBasedOnRule(rules[i][3])
+            }
         }
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 1
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 0
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 1
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 0
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 1
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 0
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 1
-        ) {
-            return 'dead'
-        }
-
     }
 }
 
-function state(cell) {
+function stateBasedOnRule(response) {
+    if (response == 1) {
+        return 'live'
+    }
 
-    let cellDiv = document.getElementById(cell.id)
-
-    return cellDiv.classList.contains('live') ? 1 : 0
+    return 'dead'
 }

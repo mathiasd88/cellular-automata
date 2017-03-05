@@ -22,14 +22,6 @@ export default class DomElement {
 
         thisNode.appendChild(node)
     }
-
-    getParent() {
-
-    }
-
-    getChildren() {
-
-    }
 }
 
 function createUniqueId() {

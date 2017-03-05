@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,9 +71,46 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class DomElement {
+    constructor() {
+        this.id = createUniqueId()
+    }
+
+    getId() {
+        return this.id
+    }
+
+    getDomRepresentation() {
+        return document.getElementById(this.id)
+    }
+
+    appendChild(node) {
+        let element = this.getDomRepresentation(this.id)
+        element.appendChild(node)
+    }
+
+    appendDomElement(element) {
+        let node = document.getElementById(element.id)
+        let thisNode = document.getElementById(this.id)
+
+        thisNode.appendChild(node)
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = DomElement;
+
+
+function createUniqueId() {
+    return Math.random().toString(36);
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cell__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rules__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__generation__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rules__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__generation__ = __webpack_require__(3);
 
 
 
@@ -139,34 +176,11 @@ function randomizeLife()
 }
 
 /***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cellularautomata__ = __webpack_require__(0);
-
-
-let rules = [
-    [0, 0, 0, 0],
-    [0, 0, 1, 1],
-    [0, 1, 0, 1],
-    [0, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 0, 1, 1],
-    [1, 1, 0, 1],
-    [1, 1, 1, 0],
-]
-
-let automata = new __WEBPACK_IMPORTED_MODULE_0__cellularautomata__["a" /* default */]('app', rules)
-automata.draw()
-
-/***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domelement__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domelement__ = __webpack_require__(0);
 
 
 class Cell extends __WEBPACK_IMPORTED_MODULE_0__domelement__["a" /* default */] {
@@ -205,96 +219,7 @@ class Cell extends __WEBPACK_IMPORTED_MODULE_0__domelement__["a" /* default */] 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class Rules {
-    static calculateStatus(rules, index, cell, previousGeneration) {
-        previousGeneration = previousGeneration.getDomRepresentation().childNodes
-
-        let prevSelf = previousGeneration[index]
-        let leftSibling = prevSelf.previousElementSibling || previousGeneration[previousGeneration.length - 1]
-        let rightSibling = prevSelf.nextElementSibling || previousGeneration[0]
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 0
-        ) {
-            return 'dead'
-        }
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 1
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 0
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 0 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 1
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 0
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 0 &&
-            state(rightSibling) == 1
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 0
-        ) {
-            return 'live'
-        }
-
-        if (
-            state(leftSibling) == 1 &&
-            state(prevSelf) == 1 &&
-            state(rightSibling) == 1
-        ) {
-            return 'dead'
-        }
-
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Rules;
-
-
-function state(cell) {
-
-    let cellDiv = document.getElementById(cell.id)
-
-    return cellDiv.classList.contains('live') ? 1 : 0
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domelement__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__domelement__ = __webpack_require__(0);
 
 
 class Generation extends __WEBPACK_IMPORTED_MODULE_0__domelement__["a" /* default */] {
@@ -319,49 +244,58 @@ class Generation extends __WEBPACK_IMPORTED_MODULE_0__domelement__["a" /* defaul
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class Rules {
+    static calculateStatus(rules, index, cell, previousGeneration) {
+        previousGeneration = previousGeneration.getDomRepresentation().childNodes
+
+        let prevSelf = previousGeneration[index]
+        let leftSibling = prevSelf.previousElementSibling || previousGeneration[previousGeneration.length - 1]
+        let rightSibling = prevSelf.nextElementSibling || previousGeneration[0]
+
+        for (let i = 0; i < rules.length; i++) {
+            if (state(leftSibling) == rules[i][0] && state(prevSelf) == rules[i][1] && state(rightSibling) == rules[i][2]) {
+                return stateBasedOnRule(rules[i][3])
+            }
+        }
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Rules;
+
+
+function stateBasedOnRule(response) {
+    if (response == 1) {
+        return 'live'
+    }
+
+    return 'dead'
+}
+
+/***/ }),
 /* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class DomElement {
-    constructor() {
-        this.id = createUniqueId()
-    }
-
-    getId() {
-        return this.id
-    }
-
-    getDomRepresentation() {
-        return document.getElementById(this.id)
-    }
-
-    appendChild(node) {
-        let element = this.getDomRepresentation(this.id)
-        element.appendChild(node)
-    }
-
-    appendDomElement(element) {
-        let node = document.getElementById(element.id)
-        let thisNode = document.getElementById(this.id)
-
-        thisNode.appendChild(node)
-    }
-
-    getParent() {
-
-    }
-
-    getChildren() {
-
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = DomElement;
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__cellularautomata__ = __webpack_require__(1);
 
 
-function createUniqueId() {
-    return Math.random().toString(36);
-}
+let rules = [
+    [0, 0, 0, 0],
+    [0, 0, 1, 1],
+    [0, 1, 0, 1],
+    [0, 1, 1, 1],
+    [1, 0, 0, 1],
+    [1, 0, 1, 1],
+    [1, 1, 0, 1],
+    [1, 1, 1, 0],
+]
+
+let automata = new __WEBPACK_IMPORTED_MODULE_0__cellularautomata__["a" /* default */]('app', rules)
+automata.draw()
 
 /***/ })
 /******/ ]);
