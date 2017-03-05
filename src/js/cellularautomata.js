@@ -1,52 +1,53 @@
-export default class CellularAutomata
-{
+import Cell from './cell'
+import Rules from './rules'
+import Generation from './generation'
+
+export default class CellularAutomata {
     constructor(appId, rules, size = 100) {
         this.app = document.getElementById(appId)
         this.appId = appId
         this.rules = rules
         this.size = size
-
-        this.process()
     }
 
     process() {
-        
-        // Create the first generation (with a random life state)
-        let firstGeneration = this.createFirstGeneration()
-        
+        // Creates the first generation (with a random life state)
+        let generation = this.createFirstGeneration()
 
-
-        // For 1 ti this.size:
-            // Then create another generation with a rule based life state
-    }
-
-    createCell() {
-        let cell = document.createElement('div')
-        cell.classList.add('cell');
-        cell.classList.add(randomizeLife())
-        return cell
+        // Creates next generations (rule based life status)
+        for (let i = 0; i < this.size; i++) {
+            generation = this.createNextGeneration(generation)
+        }
     }
 
     createFirstGeneration() {
-        let generation = document.createElement('div')
+        let generation = new Generation(this.app)
+        generation.create()
 
-        this.app.appendChild(generation)
-
-        for (let i = 1; i < this.size; i++) {
-            let cell = this.createCell()
-            generation.appendChild(cell)
+        for (let i = 0; i < this.size; i++) {
+            let cell = new Cell(generation, randomizeLife())
+            cell.create()
         }
 
         return generation
     }
 
-    createGeneration() {
+    createNextGeneration(previousGeneration) {
+        let newGeneration = new Generation(this.app)
+        newGeneration.create()
 
+        for (let i = 0; i < this.size; i++) {
+            let cell = new Cell(newGeneration)
+            let newStatus = Rules.calculateStatus(this.rules, i, cell, previousGeneration)
+            cell.setStatus(newStatus)
+            cell.create()
+        }
+
+        return newGeneration
     }
-
 
     draw() {
-        
+        this.process()
     }
 }
 
@@ -58,45 +59,3 @@ function randomizeLife()
     
     return options[random]
 }
-
-
-/*
-let app = document.getElementById('app')
-let generation = document.querySelector('.generation')
-
-createGeneration()
-nextGeneration()
-
-function createCell()
-{
-    let cell = document.createElement('div')
-    cell.classList.add('cell');
-    cell.classList.add(randomizeLife())
-    return cell
-}
-
-function createGeneration()
-{
-    for (let i = 0; i < 100; i++) {
-        let cell = createCell()
-        generation.appendChild(cell)
-    }
-}
-
-function nextGeneration()
-{
-    let previousGeneration = document.querySelector('.generation')
-    let newGeneration = previousGeneration.cloneNode(true)
-
-    app.appendChild(newGeneration)
-}
-
-function randomizeLife()
-{
-    let options = ['live', 'dead']
-
-    let random = Math.floor(Math.random() * options.length)
-    
-    return options[random]
-}
-*/

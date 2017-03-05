@@ -5,7 +5,8 @@
   "author": "Mathías Donoso <mathiasd88@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --progress --colors --watch"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
