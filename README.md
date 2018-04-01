@@ -15,10 +15,10 @@ automata.draw()
 ```
 The **draw()** method will show tha automata inside the element with the **parentId** in screen.
 
-###Rules structure:
+### Rules structure:
 [Left Neighbour, Previous Cell, Right Neighbour, New State for the Cell]
 
-####Example:
+#### Example:
 For the first rule in:
 ![](http://atlas.wolfram.com/01/01/126/01_01_4_126.gif)
 
