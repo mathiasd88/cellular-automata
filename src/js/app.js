@@ -1,4 +1,4 @@
-import CellularAutomata from './cellularautomata'
+import CellularAutomata from "./cellularautomata";
 
 let rules = [
     [0, 0, 0, 0],
@@ -9,7 +9,7 @@ let rules = [
     [1, 0, 1, 1],
     [1, 1, 0, 1],
     [1, 1, 1, 0],
-]
+];
 
-let automata = new CellularAutomata('app', rules)
-automata.draw()
+let automata = new CellularAutomata("app", rules);
+automata.draw();
