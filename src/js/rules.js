@@ -1,3 +1,18 @@
+function stateBasedOnRule(response) {
+    if (parseInt(response) === 1) {
+        return "live";
+    }
+
+    return "dead";
+}
+
+function state(cell) {
+
+    let cellDiv = document.getElementById(cell.id);
+
+    return cellDiv.classList.contains("live") ? 1 : 0;
+}
+
 export default class Rules {
     static calculateStatus(rules, index, previousGeneration) {
         previousGeneration = previousGeneration.getDomRepresentation().childNodes;
@@ -12,19 +27,4 @@ export default class Rules {
             }
         }
     }
-}
-
-function stateBasedOnRule(response) {
-    if (parseInt(response) === 1) {
-        return "live";
-    }
-
-    return "dead";
-}
-
-function state(cell) {
-
-    let cellDiv = document.getElementById(cell.id);
-
-    return cellDiv.classList.contains("live") ? 1 : 0;
 }

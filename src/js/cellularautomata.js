@@ -2,6 +2,14 @@ import Cell from "./cell";
 import Rules from "./rules";
 import Generation from "./generation";
 
+function randomizeLife() {
+    let options = ["live", "dead"];
+
+    let random = Math.floor(Math.random() * options.length);
+
+    return options[random];
+}
+
 export default class CellularAutomata {
     constructor(appId, rules, height = 100, width = 100) {
         this.app = document.getElementById(appId);
@@ -49,13 +57,4 @@ export default class CellularAutomata {
     draw() {
         this.process();
     }
-}
-
-function randomizeLife()
-{
-    let options = ["live", "dead"];
-
-    let random = Math.floor(Math.random() * options.length);
-    
-    return options[random];
 }

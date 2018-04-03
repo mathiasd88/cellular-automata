@@ -1,4 +1,4 @@
-import DomElement from "./domelement"
+import DomElement from "./domelement";
 
 export default class Generation extends DomElement {
     constructor(parent) {

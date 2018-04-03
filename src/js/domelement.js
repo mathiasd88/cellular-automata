@@ -1,3 +1,7 @@
+function createUniqueId() {
+    return Math.random().toString(36);
+}
+
 export default class DomElement {
     constructor() {
         this.id = createUniqueId();
@@ -22,8 +26,4 @@ export default class DomElement {
 
         thisNode.appendChild(node);
     }
-}
-
-function createUniqueId() {
-    return Math.random().toString(36);
 }
