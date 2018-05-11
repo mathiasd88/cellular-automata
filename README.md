@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+This project is inspired by [wolfram](http://mathworld.wolfram.com/CellularAutomaton.html).
+
 ```javascript
 
 let automata = new CellularAutomata(parentId, rules)
